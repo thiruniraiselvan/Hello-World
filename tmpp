@@ -1,0 +1,16 @@
+HOST='216.144.243.41' # change the ipaddress accordingly
+USER='a92c073d' # username also change
+PASSWD='Admin@aaum12' # password also change
+ftp -n $HOST <<END_SCRIPT
+quote USER $USER
+quote PASS $PASSWD
+bin
+prompt off
+cd /aaumanalytics.com/logs/W3SVC10 # this folder contains files...
+lcd /home/aaum/logs/ # this location is local directory
+mget *.log
+bye
+END_SCRIPT
+
+
+tail -f  *.log | nc 121.242.232.136 45855
